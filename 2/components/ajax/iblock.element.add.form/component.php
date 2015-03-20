@@ -10,33 +10,33 @@ $ELEMENT_ID = $_REQUEST["id"];
 $USER_ID = $_REQUEST["user_id"];
 $LIKE = $_REQUEST["like"];
 						
-						// îáðàùàåìñÿ ê èíôîáëîêó ïî åãî ID
+						// Ð¾Ð±Ñ€Ð°Ñ‰Ð°ÐµÐ¼ÑÑ Ðº Ð¸Ð½Ñ„Ð¾Ð±Ð»Ð¾ÐºÑƒ Ð¿Ð¾ ÐµÐ³Ð¾ ID
  						$arSelect = Array("ID", "PROPERTY_USER_LIKES");
 						$arFilter = Array("IBLOCK_ID"=>7, "ID" => $ELEMENT_ID, "ACTIVE"=>"Y");
 						$res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 						
-						// ïîëó÷àåì çíà÷åíèÿ èç ìàññèâà USER_LIKES
+						// Ð¿Ð¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° USER_LIKES
 							while($ob = $res->GetNextElement()){
 							  $arFields = $ob->GetFields();							 		
 							  $arResult["USER_LIKES"][] = $arFields["PROPERTY_USER_LIKES_VALUE"];							  
 							 	}
  					
 						if($LIKE == 1)	{
-						// åñëè ñòàòüÿ íðàâèòñÿ, ïðîâåðÿåì íàëè÷èå óæå òàêîãî ïîëüçîâàòåëÿ â ìàññèâå, â ñëó÷àå îòñóòñòâèÿ - äîáàâëÿåì åãî
+						// ÐµÑÐ»Ð¸ ÑÑ‚Ð°Ñ‚ÑŒÑ Ð½Ñ€Ð°Ð²Ð¸Ñ‚ÑÑ, Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ðµ ÑƒÐ¶Ðµ Ñ‚Ð°ÐºÐ¾Ð³Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ, Ð² ÑÐ»ÑƒÑ‡Ð°Ðµ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²Ð¸Ñ - Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ ÐµÐ³Ð¾
 						if(!in_array($USER_ID,$arResult["USER_LIKES"])){
 								$arResult["USER_LIKES"][] = $USER_ID;
 						}
 						}		
 				
 						if($LIKE == 0)	{ 
-						// åñëè ñòàòüÿ íå íðàâèòñÿ - èùåì èíäåêñ ïîëüçîâàòåëÿ, êîòîðîãî íóæíî óäàëèòü
+						// ÐµÑÐ»Ð¸ ÑÑ‚Ð°Ñ‚ÑŒÑ Ð½Ðµ Ð½Ñ€Ð°Ð²Ð¸Ñ‚ÑÑ - Ð¸Ñ‰ÐµÐ¼ Ð¸Ð½Ð´ÐµÐºÑ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð½ÑƒÐ¶Ð½Ð¾ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ
 						$i = array_search($USER_ID,$arResult["USER_LIKES"]);
 						if($i !== false)  {					
-						unset($arResult["USER_LIKES"][$i]);	 // óäàëÿåì ïîëüçîâàòåëÿ
+						unset($arResult["USER_LIKES"][$i]);	 // ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 						}
 						}
 						
-//îáíîâëåíèå ìíîæåñòâåííîãî ïîëÿ USER_LIKES â èíôîáëîêå
+//Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»Ñ USER_LIKES Ð² Ð¸Ð½Ñ„Ð¾Ð±Ð»Ð¾ÐºÐµ
 CIBlockElement::SetPropertyValuesEx($ELEMENT_ID, 7, array("25" => $arResult["USER_LIKES"]));
 
-$this->IncludeComponentTemplate(); //ïîäêëþ÷àåì øàáëîí êîìïîíåíòà
+$this->IncludeComponentTemplate(); //Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ ÑˆÐ°Ð±Ð»Ð¾Ð½ ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ð°

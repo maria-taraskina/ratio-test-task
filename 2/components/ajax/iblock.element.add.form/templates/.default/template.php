@@ -1,7 +1,7 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
-// åñëè ó ñòàòüè åñòü ïîëüçîâàòåëè, êîòîðûì îíà íðàâèòñÿ - âûâîäèì èõ
+// ÐµÑÐ»Ð¸ Ñƒ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ ÐµÑÑ‚ÑŒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ð¸, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¼ Ð¾Ð½Ð° Ð½Ñ€Ð°Ð²Ð¸Ñ‚ÑÑ - Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ Ð¸Ñ…
 if(count($arResult["USER_LIKES"])){
 				foreach($arResult["USER_LIKES"] as $user){	
 							$rsUser = CUser::GetByID($user);
